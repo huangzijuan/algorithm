@@ -20,4 +20,7 @@ public class BaseTree {
     /**
      * 中序遍历二叉树
      */
+    public void midTraversal() {
+
+    }
 }
