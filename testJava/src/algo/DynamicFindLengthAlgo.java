@@ -7,8 +7,8 @@ public class DynamicFindLengthAlgo {
         DynamicFindLengthAlgo dynamicFindLengthAlgo = new DynamicFindLengthAlgo();
         int[] array1 = {1, 2, 3, 2, 1, 0};
         int[] array2 = {3, 2, 4, 1, 7, 0};
-        //int result = dynamicFindLengthAlgo.findLengthStr2(array1, array2);
-        int result = dynamicFindLengthAlgo.findLengthSequence2(array1, array2);
+        int result = dynamicFindLengthAlgo.findLengthStr1(array1, array2);
+        //int result = dynamicFindLengthAlgo.findLengthSequence1(array1, array2);
         System.out.println(result);
     }
 
@@ -33,7 +33,7 @@ public class DynamicFindLengthAlgo {
     }
 
     /**
-     * 找出最长递增子串（使用一维数组）
+     * 找出最长公共子串（使用一维数组）
      */
     public static int findLengthStr2(int[] array1, int[] array2) {
         int maxLength = 0;
@@ -53,7 +53,7 @@ public class DynamicFindLengthAlgo {
     }
 
     /**
-     * 找出最长递增子序列（使用二维数组）
+     * 找出最长公共子序列（使用二维数组）
      */
     public static int findLengthSequence1(int[] array1, int[] array2) {
         int maxLength = 0;
