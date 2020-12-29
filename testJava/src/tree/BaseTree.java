@@ -5,15 +5,6 @@ import util.CommonUtils;
 import java.util.*;
 
 public class BaseTree {
-    public static class TreeNode {
-        public int value;
-        public TreeNode left;
-        public TreeNode right;
-
-        public TreeNode(int newValue) {
-            this.value = newValue;
-        }
-    }
 
     public TreeNode buildTree(TreeNode root, int[] numbers, int index) {
         if (index >= numbers.length) {
@@ -48,7 +39,7 @@ public class BaseTree {
 
     public void preTraversal(TreeNode root, ArrayList<Integer> resultList) {
         if (root == null) return;
-        resultList.add(root.value);
+        resultList.add(root.val);
         preTraversal(root.left, resultList);
         preTraversal(root.right, resultList);
     }
@@ -62,7 +53,7 @@ public class BaseTree {
         treeNodeStack.push(root);
         while (!treeNodeStack.empty()) {
             TreeNode treeNode = treeNodeStack.pop();
-            resultList.add(treeNode.value);
+            resultList.add(treeNode.val);
             if (treeNode.right != null) {
                 treeNodeStack.push(treeNode.right);
             }
@@ -83,7 +74,7 @@ public class BaseTree {
         tempQueue.add(root);
         while (!tempQueue.isEmpty()) {
             TreeNode treeNode = tempQueue.poll();
-            result.add(treeNode.value);
+            result.add(treeNode.val);
             if (treeNode.left != null) {
                 tempQueue.offer(treeNode.left);
             }
@@ -113,8 +104,8 @@ public class BaseTree {
 
         while (!from.isEmpty()) {
             TreeNode treeNode = from.pop();
-            result.add(treeNode.value);
-            System.out.print(" " + treeNode.value);
+            result.add(treeNode.val);
+            System.out.print(" " + treeNode.val);
             if (level % 2 == 0) {
                 if (treeNode.left != null) {
                     to.push(treeNode.left);

@@ -1,6 +1,7 @@
 package util;
 
 import linkedlist.BaseLinkedList;
+import linkedlist.ListNode;
 
 import java.util.List;
 
@@ -31,9 +32,9 @@ public class CommonUtils {
         System.out.println();
     }
 
-    public static void printLinkedList(BaseLinkedList.Node head) {
+    public static void printLinkedList(ListNode head) {
         while (head != null) {
-            System.out.print(head.value + " ");
+            System.out.print(head.val + " ");
             head = head.next;
         }
         System.out.println(' ');
