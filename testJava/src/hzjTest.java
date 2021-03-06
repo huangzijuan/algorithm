@@ -9,9 +9,12 @@ public class hzjTest {
 //        int a[]={1,2,-1,-5,-6,7,-7,-10};
 //        new hzjTest().setParted1(a,0,a.length-1);
 
-        for (int i = 1; i < 10; i++) {
-            System.out.println("hzjhzj:" + cartesianProduct(i));
-        }
+        // 测试笛卡尔积
+//        for (int i = 1; i < 10; i++) {
+//            System.out.println("hzjhzj:" + cartesianProduct(i));
+//        }
+
+        System.out.println("最大公约数： " + gcd(4, 8) + " 最小公倍数： " + getMinMultiple(3, 4));
     }
 
     public void setParted1(int[] a,int left,int right){
@@ -66,5 +69,24 @@ public class hzjTest {
         int leftHeight = height(treeNode.left);
         int rightHeight = height(treeNode.right);
         return leftHeight > rightHeight ? leftHeight + 1 : rightHeight + 1;
+    }
+
+    private static int gcd(int x, int y) {
+        return y > 0 ? gcd(y, x % y) : x;
+    }
+
+    // 获取两个数的最大公约数（辗转相除法）
+    public static int getMaxDivisor(int first, int second) {
+        int max = Math.max(first, second);
+        int min = Math.min(first, second);
+        if (max % min == 0) {
+            return min;
+        }
+        return getMaxDivisor(min, max % min);
+    }
+
+    // 获取两个数的最小公倍数
+    public static int getMinMultiple(int first, int second) {
+        return first * second / getMaxDivisor(first, second);
     }
 }

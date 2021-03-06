@@ -41,9 +41,9 @@ public class Num173 {
 //    }
 
     private Queue<TreeNode> iterator = new ArrayDeque<>();
-    public BSTIterator(TreeNode root) {
-        inOrder(root);
-    }
+//    public BSTIterator(TreeNode root) {
+//        inOrder(root);
+//    }
 
     private void inOrder(TreeNode root) {
         if (root == null) {

@@ -8,10 +8,15 @@ public class BaseLinkedList {
         BaseLinkedList baseLinkedList = new BaseLinkedList();
         ListNode head = buildLinkedList();
         CommonUtils.printLinkedList(head);
-//        Node reverse1 = baseLinkedList.reverse1(head);
-//        CommonUtils.printLinkedList(reverse1);
-        ListNode reverse2 = baseLinkedList.reverse2(head);
-        CommonUtils.printLinkedList(reverse2);
+
+        Integer aa = new Integer(3);
+        baseLinkedList.test(aa);
+        System.out.println("hzjhzj " + aa);
+
+        ListNode reverse1 = baseLinkedList.reverse1(head);
+        CommonUtils.printLinkedList(reverse1);
+//        ListNode reverse2 = baseLinkedList.reverse2(head);
+//        CommonUtils.printLinkedList(reverse2);
 
     }
 
@@ -37,6 +42,10 @@ public class BaseLinkedList {
         return head;
     }
 
+    public static void test(Integer aa) {
+
+    }
+
     /**
      * 单链表反转（遍历方式）
      * 需要两个指针，一个指向下一个节点，一个指向前一个节点
@@ -45,6 +54,7 @@ public class BaseLinkedList {
         ListNode next;
         ListNode pre = null;
         while (node != null) {
+            //System.out.println("hzjhzj node=" + node.val);
             next = node.next;
             node.next = pre;
             pre = node;
