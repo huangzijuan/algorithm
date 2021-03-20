@@ -3,6 +3,7 @@ package geek;
 import linkedlist.ListNode;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class week1 {
 
@@ -466,7 +467,7 @@ public class week1 {
 
     //方法三：单调栈
     public int largestRectangleArea3(int[] heights) {
-        int[] tmp = new int[heights.length + 2];
+        int[] tmp = new int[heights.length + 2];  //头尾加0是为了统一操作
         System.arraycopy(heights, 0, tmp, 1, heights.length);
 
         Stack<Integer> stack = new Stack<>();
@@ -482,9 +483,74 @@ public class week1 {
     }
 
     /**
-     *
+     * 滑动窗口最大值（使用双端队列）//双端队列从大到小排列
      */
     public int[] maxSlidingWindow(int[] nums, int k) {
+        int n = nums.length;
+        if (n <= 1) return nums;
+        int[] result = new int[n - k + 1];
+        int resultIndex = 0;
+        Deque<Integer> deque = new ArrayDeque<>();
 
+        for (int i = 0; i < n; i++) {
+            while (!deque.isEmpty() && nums[i] > nums[deque.peekLast()]) {
+                deque.pollLast();
+            }
+
+            deque.offer(i);
+
+            if (deque.peekFirst() < i - k + 1) {
+                deque.pollFirst();
+            }
+
+            if (i >= k - 1) {
+                result[resultIndex++] = nums[deque.peekFirst()];
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 有效的字母异位词
+     */
+    public boolean isAnagram(String s, String t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
+        int[] table = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            table[s.charAt(i) - 'a']++;
+            table[t.charAt(i) - 'a']--;
+        }
+
+        for (int i = 0; i < 26; i++) {
+            if (table[i] != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 字母异位词分组
+     * (先给字符串编码再排序)
+     */
+    public List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> result = new ArrayList<>();
+        result.addAll(Arrays.stream(strs).collect(Collectors.groupingBy( str -> {
+            int[] table = new int[26];
+            for (int i = 0; i < str.length(); i++) {
+                table[str.charAt(i) - 'a']++;
+            }
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < 26; i++) {
+                if (table[i] > 0) {
+                    stringBuilder.append((char) ('a' + i));
+                    stringBuilder.append(table[i]);
+                }
+            }
+            return stringBuilder.toString();
+        })).values());
+        return result;
     }
 }
