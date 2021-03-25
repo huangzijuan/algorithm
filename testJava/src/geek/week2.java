@@ -2,10 +2,7 @@ package geek;
 
 import tree.TreeNode;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class week2 {
 
@@ -58,7 +55,7 @@ public class week2 {
         if (root == null) {
             return;
         }
-        for (Node node: root.children) {
+        for (Node node : root.children) {
             postorderHelper(node, result);
         }
         result.add(root.val);
@@ -78,7 +75,7 @@ public class week2 {
             return;
         }
         result.add(root.val);
-        for (Node node: root.children) {
+        for (Node node : root.children) {
             preorderHelper(node, result);
         }
     }
@@ -100,7 +97,7 @@ public class week2 {
             while (curSize-- > 0) {
                 Node head = tempQueue.poll();
                 if (head.children != null && head.children.size() > 0) {
-                    for (Node node: head.children) {
+                    for (Node node : head.children) {
                         tempQueue.offer(node);
                     }
                 }
@@ -113,10 +110,66 @@ public class week2 {
     }
 
     /**
-     * TOP K问题
      * 剑指40 最小的k个数
+     * TOP K问题
+     * 1. sort NLogN
+     * 2. heap NLogK
+     * 3. quick-sort
+     * 方法一：堆实现（利用系统自带的PriorityQueue）
      */
     public int[] getLeastNumbers(int[] arr, int k) {
+        PriorityQueue<Integer> heap = new PriorityQueue<>();
+        for (int i = 0; i < arr.length; i++) {
+            heap.add(arr[i]);
+        }
 
+        int[] result = new int[k];
+        for (int i = 0; i < k; i++) {
+            result[i] = heap.poll();
+        }
+        return result;
+    }
+
+    /**
+     * 方法二：快排实现（利用系统自带的）
+     */
+    public int[] getLeastNumbers2(int[] arr, int k) {
+        if (arr.length == 0 || k == 0) {
+         return new int[0];
+        }
+        if (arr.length == k) {
+            return arr;
+        }
+        return search(arr, 0, arr.length - 1, k);
+    }
+
+    private int[] search(int[] arr, int low, int high, int k) {
+        int partition = partition(arr, low, high);
+        if (partition == k) {
+            return Arrays.copyOf(arr, k);
+        } else if (partition > k) {
+            return search(arr, low, partition - 1, k);
+        } else {
+            return search(arr, partition + 1, high, k);
+        }
+    }
+
+    // 选最左边为基准值，left始终指向从左边起第一个大于基准值的数，right始终指向从右边起第一个小于基准值的数
+    private int partition(int[] arr, int left, int right) {
+        int baseValue = arr[left];
+        int i = left, j = right;
+        while (i < j) {
+            while (i < right && arr[i] <= baseValue) i++;
+            while (j > left && arr[j] >= baseValue) j--;
+
+            if (i < j) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        arr[left] = arr[j];
+        arr[j] = baseValue;
+        return j;
     }
 }

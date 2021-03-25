@@ -8,7 +8,7 @@ public class BaseSort {
         //baseSort.bubbleSort(array);
         //baseSort.selectSort(array);
         //baseSort.insertSort(array);
-        baseSort.quickSort1(array, 0, array.length - 1);
+        baseSort.quickSort(array, 0, array.length - 1);
         printArray(array);
 
     }
@@ -59,6 +59,27 @@ public class BaseSort {
             }
             array[insertIndex] = temp;
         }
+    }
+
+    /**
+     * 最常用的partition写法，须牢记
+     */
+    public static int partition1(int[] arr, int left, int right) {
+        int baseValue = arr[left];
+        int i = left, j = right;
+        while (i < j) {
+            while (i < right && arr[i] <= baseValue) i++;
+            while (j > left && arr[j] >= baseValue) j--;
+
+            if (i < j) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        arr[left] = arr[j];
+        arr[j] = baseValue;
+        return j;
     }
 
     /*
