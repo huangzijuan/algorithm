@@ -1,5 +1,6 @@
 package tree;
 
+import geek.week3;
 import util.CommonUtils;
 
 import java.util.*;
@@ -21,10 +22,13 @@ public class BaseTree {
         BaseTree baseTree = new BaseTree();
         int[] nums = new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8};
         TreeNode root = baseTree.buildTree(null, nums, 0);
-        List<Integer> result = baseTree.levelOrderTraversal1(root);
-        //List<Integer> result = baseTree.preorderTraversal2(root);
-        //List<Integer> result = baseTree.levelOrderTraversal(root);
-        CommonUtils.printArray3(result);
+//        List<Integer> result = baseTree.levelOrderTraversal1(root);
+//        //List<Integer> result = baseTree.preorderTraversal2(root);
+//        //List<Integer> result = baseTree.levelOrderTraversal(root);
+//        CommonUtils.printArray3(result);
+        week3 week3 = new week3();
+        System.out.println("hzjhzj: " + week3.serialize1(root));
+
     }
 
 

@@ -172,4 +172,55 @@ public class week2 {
         arr[j] = baseValue;
         return j;
     }
+
+
+    /**
+     * 347 前k个高频元素
+     */
+    public int[] topKFrequent(int[] nums, int k) {
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        for (int num : nums) {
+            hashMap.put(num, hashMap.getOrDefault(num, 0) + 1);
+        }
+
+        PriorityQueue<Map.Entry<Integer, Integer>> priorityQueue = new PriorityQueue<>((num1, num2) -> (num2.getValue() - num1.getValue()));
+
+        for (Map.Entry<Integer, Integer> entry : hashMap.entrySet()) {
+            priorityQueue.offer(entry);
+        }
+
+        int[] result = new int[k];
+        for (int i = 0; i < k; i++) {
+            result[i] = priorityQueue.poll().getKey();
+        }
+        return result;
+    }
+
+    /**
+     * 剑指49 丑数
+     * 方法一：建立小根堆，每次从堆中弹出最小的丑数，乘以（2，3，5）放入set集合中，记录set
+     */
+    public int nthUglyNumber(int n) {
+        int[] uglyNums = new int[]{2, 3, 5};
+        Set<Long> set = new HashSet<>();
+        PriorityQueue<Long> priorityQueue = new PriorityQueue<>();
+        priorityQueue.offer(1l);
+        int count = 0;
+        while (priorityQueue.size() > 0) {
+            long topMin = priorityQueue.poll();
+            count++;
+
+            if (count == n) {
+                return (int)topMin;
+            }
+
+            for (int num : uglyNums) {
+                if (!set.contains(topMin * num)) {
+                    set.add(topMin * num);
+                    priorityQueue.add(topMin * num);
+                }
+            }
+        }
+        return -1;
+    }
 }
